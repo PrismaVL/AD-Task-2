@@ -74,7 +74,6 @@ if ($temp > 30) {
                 }
                 ?>
             </div>
-            
             <h3>Switch</h3>
             <pre>&lt;?php
 $day = "Monday";
@@ -141,6 +140,79 @@ while ($count <= 3) {
                 ?>
             </div>
         </div>
+        <div class="box">
+    <h2>4. Arrays, Dictionaries, Functions</h2>
+    <h3>Code Example:</h3>
+    <pre>&lt;?php
+$dataHandler = [
+    "array" =&gt; function () {
+        $colors = ["Red", "Green", "Blue"];
+        echo "Array Example:&lt;br&gt;";
+        echo "Second color is: " . $colors[1];
+    },
+    "dictionary" =&gt; function () {
+        $person = [
+            "name" =&gt; "Alice",
+            "age" =&gt; 28
+        ];
+        echo "Dictionary Example:&lt;br&gt;";
+        echo "Name: {$person['name']}&lt;br&gt;";
+        echo "Age: {$person['age']}";
+    },
+    "function" =&gt; function () {
+        function greet($name) {
+            return "Hello, " . $name;
+        }
+        echo "Function Example:&lt;br&gt;";
+        echo greet("Bob");
+    }
+];
+
+$index = 1; // 0 = array, 1 = dictionary, 2 = function
+$keys = array_keys($dataHandler);
+$dataHandler[$keys[$index]]();
+?&gt;</pre>
+
+    <h3>Code Output</h3>
+    <div class="result">
+        <?php
+        $dataHandler = [
+            "array" => function () {
+                $colors = ["Red", "Green", "Blue"];
+                echo "Array Example:<br>";
+                echo "Second color is: " . $colors[1];
+            },
+            "dictionary" => function () {
+                $person = [
+                    "name" => "Alice",
+                    "age" => 28
+                ];
+                echo "Dictionary Example:<br>";
+                echo "Name: {$person['name']}<br>";
+                echo "Age: {$person['age']}";
+            },
+            "function" => function () {
+                function greet($name) {
+                    return "Hello, " . $name;
+                }
+                echo "Function Example:<br>";
+                echo greet("Bob");
+            }
+        ];
+
+        $index = isset($_GET['index']) ? (int)$_GET['index'] : 0;
+        $keys = array_keys($dataHandler);
+        if ($index >= count($keys)) {
+            $index = 0;
+        }
+        $dataHandler[$keys[$index]]();
+        ?>
+
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+        <button onclick="location.href='?index=<?php echo ($index + 1); ?>'">Next</button>
+    </div>
+</div>
     </div>
 </body>
 </html>
